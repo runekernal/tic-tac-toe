@@ -1,0 +1,64 @@
+@import url('fonts.css');
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: Poppins;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    gap: 20px;
+}
+.game-container {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+}
+.cell {
+    font-family: Fredoka;
+    font-weight: 600;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-size: 2em;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: border 0.3s ease;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cell.winner {
+    border: #000000 2px solid;
+
+}
+.cell:hover {
+    background-color: #e0e0e0;
+}
+
+.reset-button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 1.2em;
+    min-width: 320px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+.reset-button:hover {
+    transform: scale(1.01);
+}
+
+.reset-button:active {
+    transform: scale(0.99);
+}

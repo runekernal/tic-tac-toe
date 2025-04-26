@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Fredoka';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/Fredoka/Fredoka.ttf') format('truetype');
+}
