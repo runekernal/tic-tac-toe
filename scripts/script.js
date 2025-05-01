@@ -1,5 +1,6 @@
 const cells = document.querySelectorAll(".cell");
 const resetButton = document.getElementById("reset-button");
+let isProcessing = false;
 
 resetButton.addEventListener("click", () => {
    cells.forEach((cell) => {
@@ -121,30 +122,44 @@ function disableEventListener() {
 }
 
 function gamestate(e) {
-   const cell = e.target;
-   if (cell.textContent === "") {
-      cell.textContent = "X";
-      disableEventListener();
-      let board = Array.from(cells).map((cell) => cell.textContent);
+  if (isProcessing) return; // prevent multiple rapid clicks
 
-      setTimeout(() => {
-         let winner = checkWinner(board, true);
-         if (winner) {
-            if (winner === "Draw") {
-               for (let cell of cells) {
-                  cell.classList.add("winner");
-               }
-            }
-            disableEventListener();
-            return 0;
-         }
-         tictactoeAI(board);
-         board = Array.from(cells).map((cell) => cell.textContent);
-         checkWinner(board, true) ? disableEventListener() : null;
-         enableEventListener();
-      }, 400);
-   }
+  const cell = e.target;
+  if (cell.textContent === "") {
+     cell.textContent = "X";
+     isProcessing = true;
+     disableEventListener();
+
+     let board = Array.from(cells).map((cell) => cell.textContent);
+
+     setTimeout(() => {
+        let winner = checkWinner(board, true);
+        if (winner) {
+           if (winner === "Draw") {
+              for (let cell of cells) {
+                 cell.classList.add("winner");
+              }
+           }
+           disableEventListener();
+           isProcessing = false;
+           return;
+        }
+
+        tictactoeAI(board);
+
+        board = Array.from(cells).map((cell) => cell.textContent);
+        if (checkWinner(board, true)) {
+           disableEventListener();
+           isProcessing = false;
+           return;
+        }
+
+        enableEventListener();
+        isProcessing = false;
+     }, 400);
+  }
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
    enableEventListener();
