@@ -124,7 +124,7 @@ function gamestate(e) {
           }
         }
         gameover();
-        return;
+        return 0;
       }
       tictactoeAI(board);
       board = Array.from(cells).map(cell => cell.textContent);
