@@ -124,7 +124,7 @@ function gamestate(e) {
    const cell = e.target;
    if (cell.textContent === "") {
       cell.textContent = "X";
-
+      disableEventListener();
       let board = Array.from(cells).map((cell) => cell.textContent);
 
       setTimeout(() => {
@@ -135,12 +135,13 @@ function gamestate(e) {
                   cell.classList.add("winner");
                }
             }
-            gameover();
+            disableEventListener();
             return 0;
          }
          tictactoeAI(board);
          board = Array.from(cells).map((cell) => cell.textContent);
-         checkWinner(board, true) ? gameover() : null;
+         checkWinner(board, true) ? disableEventListener() : null;
+         enableEventListener();
       }, 400);
    }
 }
